@@ -1,0 +1,46 @@
+<div class="col-sm-12">
+        <mat-card>
+                <div leaflet style="height: 630px; z-index: 990" [leafletOptions]="options" [leafletLayers]="layers"
+                        [leafletLayersControl]="layersControl" [leafletLayersControlOptions]="layersControlOptions"
+                        (leafletMapReady)="onMapReady($event)">
+                        <img src="../assets/images/output-onlinepngtools.png" class="img-responsive img-4"
+                                style="position:relative; z-index: 990; height: 20%; width: auto; margin:0;">
+                </div>
+                <br>
+                <button mat-raised-button type="button" flex="15" color="primary" style="margin-left: 1em;"
+                        (click)="UploadProjectInfoDocument()"> Upload File
+                </button>
+                <br>
+                <div class="row card" id="DocumentListDiv" *ngIf="DocumentsList.length > 0" style="margin: 1em;">
+                        <div class="header" style="padding: 1em; ">
+                                <h2>List Of Documents Uploaded</h2>
+                        </div>
+                        <div class="table-responsive" style="padding: 1em;">
+                                <table class="table table-hover table-striped" [busy]="isDocumentListTableLoading">
+                                        <thead>
+                                                <tr>
+                                                        <th>S.N</th>
+                                                        <th>Name</th>
+                                                        <th>Upload Date</th>
+                                                        <th>Actions</th>
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr *ngFor="let docs of DocumentsList; let i = index">
+                                                        <td>{{ i + 1 }}</td>
+                                                        <td>{{ docs.displayName }}</td>
+                                                        <td>
+                                                                {{ docs.creationTime | date }}
+                                                        </td>
+                                                        <td>
+                                                                <a href="{{baseUrl}}/home/download?link=wwwroot{{docs.document}}"
+                                                                        target="_blank"><button type="button"
+                                                                                class="btn btn-primary">Download</button></a>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                </table>
+                        </div>
+                </div>
+        </mat-card>
+</div>

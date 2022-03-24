@@ -1,0 +1,39 @@
+<h1>File Upload</h1>
+<div class="row">
+  <div class="col-md-12">
+    <div *ngIf="fileUpload.status==='error'">
+        <p>{{fileUpload.message}}</p> 
+    </div>
+
+    <div *ngIf="fileUpload.status==='progress'">
+        <div class="progress" style="height: 20px;margin-bottom:20px;">
+          <mat-progress-bar
+              class="example-margin"
+              color="primary"
+              mode="determinate"
+              [value]="fileUpload.message">
+          </mat-progress-bar>
+            {{fileUpload.message}}%
+        </div>
+    </div>
+    <form [formGroup] = "profileForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-group" style=" margin-bottom: 0px;">
+        <label>Display Name</label>
+      </div>
+      <div class="form-group">
+        <input type="text" required formControlName="name" class="form-control" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <input type="file" required  name="profile" (change)="onSelectedFile($event)" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success" [disabled]="saving || profileForm.invalid || !isFileSelected"
+        >Upload</button>
+      </div>
+    </form>
+    <!-- <div *ngIf="fileUpload.status==='success'">
+      <img [src]="fileUpload.filePath" height="200px" />
+    </div> -->
+    <p>{{ error }}</p>
+  </div>
+</div>

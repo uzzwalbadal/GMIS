@@ -1,0 +1,406 @@
+<form autocomplete="off" #SocialInfoForm="ngForm" (ngSubmit)="save()">
+    <h1 mat-dialog-title>Social Information</h1>
+    <div mat-dialog-content id="Myform">
+
+        <mat-card>
+            <div class="example-container">
+                <div class="row col-xs-12">
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>No of Household</mat-label>
+                            <input matInput placeholder="No of Household" [(ngModel)]="dto_socialInfo.noOfHousehold" name="dto_socialInfo.noOfHousehold" required min="0" type="number" on-focusout="NoOfHouseHoldFocusOut()">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Women Headed Household</mat-label>
+                            <input matInput placeholder="Women Headed Household" on-focusout="changeWomenHeadHouse()" [(ngModel)]="dto_socialInfo.womenHeadedHouseHold" name="womenHeadedHouseHold" [max]="dto_socialInfo.noOfHousehold" [min]="0" required type="number">
+                        </mat-form-field>
+                    </div>
+
+                    <!-- <div class="col-xs-4">
+        <mat-form-field>
+          <mat-label>Favorite food</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="food">
+              <mat-option [value]="abc">Abc</mat-option>
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> -->
+
+                    <div class="col-xs-4">
+                        <!-- <div>
+              <label>Year of Survey</label>
+            </div> -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Year of Survey</mat-label>
+                            <mat-select name="yearOfSurvey" [(ngModel)]="dto_socialInfo.yearOfSurvey" required>
+                                <mat-option *ngFor="let yrs of YearOfSurvey" [value]="yrs">{{yrs}}</mat-option>
+
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="example-container">
+                <div class="row col-xs-12">
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Female Population</mat-label>
+                            <input matInput placeholder="Female Population" [(ngModel)]="dto_socialInfo.female" name="female" required type="number" min="0" on-focusout="changeFemaleCount()">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Male Population</mat-label>
+                            <input matInput placeholder="Male" [(ngModel)]="dto_socialInfo.male" name="male" on-focusout="changeMaleCount()" required type="number" min="0">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>Total Population </label>
+                        <p>{{dto_socialInfo.totalPopulation}}</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="example-container">
+                <div class="row col-xs-12">
+                    <div class="col-xs-4">
+                        <!-- <div>
+                        <label>Major Source of Income</label>
+                      </div> -->
+                        <mat-form-field appearance="outline">
+                            <mat-label>Major Source of Income</mat-label>
+                            <mat-select id="majorSurceofIncome" [(ngModel)]="dto_socialInfo.majorSourceOfIncome" name="majorSourceOfIncome" required>
+                                <mat-option value="Government Job">Government Job</mat-option>
+                                <mat-option value="Private Job">Private Job</mat-option>
+                                <mat-option value="Agriculture">Agriculture</mat-option>
+                                <mat-option value="Remittance from Foreign Country">Remittance from Foreign Country</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Average Family Size </label>
+                        <p>{{dto_socialInfo.averageFamilySize}}</p>
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Average Annual Income Per Family</label>
+                        <p>NRs {{dto_socialInfo.averageAnnualIncomePerFamily}}</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="example-container">
+                <div class="row col-xs-12">
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Annual Income Per Family</mat-label>
+                            <input matInput placeholder="Annual Income Per Family" [(ngModel)]="dto_socialInfo.annualIncomePerFamily" name="annualIncomePerFamily" required type="number" min="0" on-focusout="annualIncomePerFamilyFocusOut()">
+                            <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Income From Agriculture</mat-label>
+                            <input matInput placeholder="Income From Agriculture" [(ngModel)]="dto_socialInfo.annualIncomePerAgriculture" name="annualIncomePerAgriculture" [readonly]="dto_socialInfo.annualIncomePerFamily < 1" required type="number" min="0" on-focusout="OtherSourceIncome()">
+                            <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <label>Income From Other Source </label>
+                        <p>NRs {{ dto_socialInfo.annualIncomePerOtherSrcs }}</p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="example-container">
+                <div class="row col-xs-12">
+                    <!-- <div class="col-xs-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Literacy Rate </mat-label>
+              <input matInput placeholder="Literacy Rate" [(ngModel)]="dto_socialInfo.literacyRate"
+              name="literacyRate" required>
+            </mat-form-field>
+          </div> -->
+
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Female Literacy Rate</mat-label>
+                            <input matInput placeholder="Female Literacy Rate" [(ngModel)]="dto_socialInfo.femaleLiteracyRate" name="femaleLiteracyRate" required min="0" max="100" (keyup)="checkPercentageValue()" on-focusout="changeFemalePercentage()">
+                            <mat-hint align="end">%</mat-hint>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Male Literacy Rate</mat-label>
+                            <input matInput placeholder="Male Literacy Rate" [(ngModel)]="dto_socialInfo.maleLiteracyRate" name="maleLiteracyRate" required min="0" max="100" (keyup)="checkPercentageValue()" on-focusout="changeMalePercentage()">
+                            <mat-hint align="end">%</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-xs-4">
+                        <label>Literacy Rate </label>
+                        <p>{{dto_socialInfo.literacyRate}} %</p>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+
+        <br>
+        <mat-card>
+            <div class="example-container">
+                <h4>Ethnic Groups</h4>
+                <div class="body table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <!-- <th>S.N</th> -->
+                                <th>Name</th>
+                                <th>Total Household Number</th>
+                                <th>Percentage</th>
+                                <th>Actions</th>
+
+                            </tr>
+                            <tr>
+
+                                <td>
+                                    <div class="col-xs-9">
+                                        <select name="SelectEthnic" [(ngModel)]="SelectEthnics" class="form-control" required>
+                      <option *ngFor="let ethic of EthicsGrpsToShow" [value]="ethic.id">{{ethic.name}}</option>
+                    </select>
+                                    </div>
+                                </td>
+                                <td><input matInput placeholder="Total Number" type="number" name="totalNoOfPeople" on-focusout="focusOutFunction()" [(ngModel)]="TotalNoOfPeople"></td>
+                                <td>
+                                    <!-- <input matInput placeholder="Percentage"  name="totalNoOfPeoplePercent" [(ngModel)]="TotalNoOfPeoplePercent"></td> -->
+                                    <td>
+                                        <div *ngIf="ShowUpdateBtn || ShowSaveBtn">
+                                            <button class="btn btn-primary" (click)="addEthicsToList()" [disabled]="SelectEthnics == 0 || isDisableAddEthicButton || this.TotalNoOfPeople==0|| this.TotalNoOfPeople==null">Add</button>
+                                        </div>
+                                    </td>
+                            </tr>
+                            <tr *ngFor="let EthicsModel of dto_EthicsModel; let i = index">
+                                <td>{{EthicsModel.ethicsGroupName}}</td>
+                                <td>{{EthicsModel.noOfPeople}}</td>
+                                <td>{{EthicsModel.noOfPeoplePercent }} %</td>
+                                <td>
+                                    <div *ngIf="ShowUpdateBtn">
+                                        <button class="btn btn-primary" (click)="RemoveEthicsGroup(EthicsModel)">Remove</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </mat-card>
+
+        <br>
+
+        <mat-card>
+            <div class="example-container">
+                <div class="row col-xs-12">
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Migration IN</mat-label>
+                            <input matInput placeholder="Annual Population Migration IN" [(ngModel)]="dto_socialInfo.annualPopMigrationIn" name="annualPopMigrationIn" min="0" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label> Migration OUT</mat-label>
+                            <input matInput placeholder="Annual Population Migration OUT" [(ngModel)]="dto_socialInfo.annualPopMigrationOut" name="annualPopMigrationOut" min="0" required>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+            </div>
+        </mat-card>
+        <br>
+
+        <mat-card>
+            <div class="example-container">
+                <h4>Land Tenure(Household No's)</h4>
+                <div class="body table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <!-- <th>S.N</th> -->
+                                <th>Category</th>
+                                <th>Number</th>
+                                <th>Percentage</th>
+
+                            </tr>
+                            <tr>
+                                <td>Land Owners</td>
+                                <td><input matInput type="number" placeholder=" Number" [(ngModel)]="dto_socialInfo.landOwners" name="landOwners" required on-focusout="calculateHouseOwner()" min="0"></td>
+                                <td>
+                                    <p>{{dto_socialInfo.landOwnersPercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tenants</td>
+                                <td><input matInput type="number" placeholder=" Number" [(ngModel)]="dto_socialInfo.tenants" name="tenants" required min="0" on-focusout="calculateHouseOwner()"></td>
+                                <td>
+                                    <p>{{dto_socialInfo.tenantsPercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Owners With Tenants</td>
+                                <td><input type="number" matInput type="number" placeholder=" Number" min="0" [(ngModel)]="dto_socialInfo.ownerWithTenants" name="ownerWithTenants" required on-focusout="calculateHouseOwner()"></td>
+                                <td>
+                                    <p>{{dto_socialInfo.ownerWithTenantsPercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Landless</td>
+                                <td><input matInput type="number" placeholder=" Number" [(ngModel)]="dto_socialInfo.landless" name="landless" required min="0" on-focusout="calculateHouseOwner()"></td>
+                                <td>
+                                    <p>{{dto_socialInfo.landlessPercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{{landOwnerTotal}}</td>
+                                <td></td>
+                            </tr>
+
+
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </mat-card>
+        <br>
+
+        <mat-card>
+            <div class="example-container">
+                <h4>Farm Size (Household No's)</h4>
+                <div class="body table-responsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <!-- <th>S.N</th> -->
+                                <th>Category</th>
+                                <th>Number</th>
+                                <th>Percentage</th>
+
+                            </tr>
+                            <tr>
+                                <td>Small (Less than 0.5 Ha)</td>
+                                <td><input matInput type="number" min="0" placeholder="Number" [(ngModel)]="dto_socialInfo.farmSizeSmall" name="farmSizeSmall" required on-focusout="calculatefarmsizeTotal()"></td>
+                                <td>
+                                    <p>{{dto_socialInfo.farmSizeSmallPercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Medium (0.5-1.0 Ha)</td>
+                                <td><input matInput type="number" on-focusout="calculatefarmsizeTotal()" min="0" placeholder="Number" [(ngModel)]="dto_socialInfo.farmSizeMedium" name="farmSizeMedium" required></td>
+                                <td>
+                                    <p>{{dto_socialInfo.farmSizeMediumPercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Large (1.0-1.5 Ha)</td>
+                                <td><input matInput type="number" on-focusout="calculatefarmsizeTotal()" min="0" placeholder="Number" [(ngModel)]="dto_socialInfo.farmSizeLarge" name="farmSizeLarge" required></td>
+                                <td>
+                                    <p>{{dto_socialInfo.farmSizeLargePercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Very Large (More Than 1.5 Ha)</td>
+                                <td><input matInput type="number" on-focusout="calculatefarmsizeTotal()" min="0" placeholder="Number" [(ngModel)]="dto_socialInfo.farmSizeVeryLarge" name="farmSizeVeryLarge" required></td>
+                                <td>
+                                    <p>{{dto_socialInfo.farmSizeVeryLargePercent}}</p> %
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td>{{farmsizeTotal}}</td>
+                                <td></td>
+                            </tr>
+
+
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </mat-card>
+        <br>
+
+        <mat-card>
+            <div class="form-group row">
+                <div class="col-md-12">
+                    <mat-label for="Annualfoodsufficiency">
+                        <h5> Annual Food Sufficiency</h5>
+                    </mat-label>
+                </div>
+
+                <div class="row" style="margin-left: 1px">
+                    <mat-radio-group required class="radio-btn-wrapper" name="dto_socialInfo.foodSufficiency" [(ngModel)]="dto_socialInfo.foodSufficiency">
+                        <div class="col-md-2">
+                            <mat-radio-button value="Surplus" name="rdr1">
+                                Surplus
+                            </mat-radio-button>
+                        </div>
+                        <div class="col-md-2">
+                            <mat-radio-button value="Defict" name="rdr2">
+                                Deficit
+                            </mat-radio-button>
+                        </div>
+
+                        <!-- <div class="col-md-2">
+              <label>No of Months</label>
+            </div> -->
+                        <div class="col-md-2">
+                            <mat-form-field appearance="outline">
+                                <input matInput type="number" placeholder="No of Months" min="0" required name="foodSufficiencMonth" [(ngModel)]="dto_socialInfo.foodSufficiencMonth">
+                            </mat-form-field>
+                        </div>
+                    </mat-radio-group>
+
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+            {{ "Cancel" | localize }}
+        </button>
+        <div *ngIf="dto_socialInfo.id > 0 ; else SaveNewData">
+            <div *ngIf="ShowUpdateBtn">
+                <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!SocialInfoForm.form.valid || saving">
+                Update
+            </button>
+            </div>
+        </div>
+        <ng-template #SaveNewData>
+            <div *ngIf="ShowSaveBtn">
+                <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!SocialInfoForm.form.valid || saving">
+                {{ "Save" | localize }}
+            </button>
+            </div>
+        </ng-template>
+
+    </div>
+</form>

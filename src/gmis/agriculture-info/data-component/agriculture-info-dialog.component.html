@@ -1,0 +1,443 @@
+<form autocomplete="off" #createRoleForm="ngForm" (ngSubmit)="save()">
+    <h1 mat-dialog-title>Cropping Pattern {{CropPattern}} Project</h1>
+    <!-- <h2>{{projectName}}</h2> -->
+
+    <div mat-dialog-content>
+        <div class="row-fluid">
+            <div class="col-md-12">
+
+                <div class="row">
+                    <!-- <div class="col-md-1">
+            
+            <label class="control-label" for="cropId">Crop Name</label>
+          </div> -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label for="cropId">Crop Name</mat-label>
+                            <!-- <input matInput placeholder="GCA" type="number" min="0" -->
+                            <mat-select name="cropId" id="cropId" [(ngModel)]="dto_Agricultre.cropId" required>
+                                <!-- <mat-option value="0">Please Select Crop</mat-option> -->
+                                <mat-option *ngFor="let crop of CropsLis" [value]="crop.id">{{crop.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-4">
+            <label for="plantingMonth">Planting Date</label>
+          </div> -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Planting Date</mat-label>
+                            <mat-select name="plantingMonth" [(ngModel)]="dto_Agricultre.plantingMonth" id="plantingMonth" required>
+                                <mat-option value="Janauary">Janauary</mat-option>
+                                <mat-option value="Feburary">Feburary</mat-option>
+                                <mat-option value="March">March</mat-option>
+                                <mat-option value="April">April</mat-option>
+                                <mat-option value="May">May</mat-option>
+                                <mat-option value="June">June</mat-option>
+                                <mat-option value="July">July</mat-option>
+                                <mat-option value="August">August</mat-option>
+                                <mat-option value="September">September</mat-option>
+                                <mat-option value="October">October</mat-option>
+                                <mat-option value="November">November</mat-option>
+                                <mat-option value="December">December</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Planting Week</mat-label>
+                            <mat-select name="plantingWeek" [(ngModel)]="dto_Agricultre.plantingWeek" required id="plantingWeek">
+                                <mat-option value="First Week">First Week</mat-option>
+                                <mat-option value="Second Week">Second Week</mat-option>
+                                <mat-option value="Third Week">Third Week</mat-option>
+                                <mat-option value="Fourth Week">Fourth Week</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- <div class="col-md-1">
+            <label for="">Crop Area</label>
+          </div> -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Crop Area</mat-label>
+
+                            <input matInput type="number" required name="cropArea" [(ngModel)]="dto_Agricultre.cropArea" min="0">
+                            <mat-hint align="end">ha</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-1">
+            <span fxLayoutAlign="start start">Ha</span>
+          </div> -->
+                    <!-- <div class="col-md-4">
+            <label>Harvesting Date</label>
+          </div> -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Harvesting Date</mat-label>
+                            <mat-select name="harvestingMonth" [(ngModel)]="dto_Agricultre.harvestingMonth" required id="harvestingMonth">
+                                <mat-option value="Janauary">Janauary</mat-option>
+                                <mat-option value="Feburary">Feburary</mat-option>
+                                <mat-option value="March">March</mat-option>
+                                <mat-option value="April">April</mat-option>
+                                <mat-option value="May">May</mat-option>
+                                <mat-option value="June">June</mat-option>
+                                <mat-option value="July">July</mat-option>
+                                <mat-option value="August">August</mat-option>
+                                <mat-option value="September">September</mat-option>
+                                <mat-option value="October">October</mat-option>
+                                <mat-option value="November">November</mat-option>
+                                <mat-option value="December">December</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Harvesting Week</mat-label>
+                            <mat-select name="harvestingWeek" [(ngModel)]="dto_Agricultre.harvestingWeek" id="harvestingWeek">
+                                <mat-option value="First Week">First Week</mat-option>
+                                <mat-option value="Second Week">Second Week</mat-option>
+                                <mat-option value="Third Week">Third Week</mat-option>
+                                <mat-option value="Fourth Week">Fourth Week</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+                <div class="row" style="margin-top:15px">
+                    <!-- <div class="col-md-1">
+            <label>Average Crop Yield</label>
+          </div> -->
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Average Crop Yield</mat-label>
+                            <input matInput type="number" [(ngModel)]="dto_Agricultre.averageCropYield" name="averageCropYield" required id="averageCropYield" min="0">
+                            <mat-hint align="end">ton/ha</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Average Crop Price</mat-label>
+                            <input matInput type="number" [(ngModel)]="dto_Agricultre.averageCropPrice" name="averageCropPrice" required id="averageCropPrice" min="0">
+                            <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div class="col-md-1">
+            <span>Ha</span>
+          </div> -->
+                    <!-- <div class="col-md-4">
+            <label>Total Cultivated Area</label>
+          </div> -->
+                    <!-- <div class="col-md-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Total Cultivated Area</mat-label>
+              <input matInput type="number" [(ngModel)]="dto_Agricultre.totalCultivatedArea" required name="totalCultivatedArea" id="totalCultivatedArea" min="0">
+              <mat-hint align="end">ha</mat-hint>
+            </mat-form-field>
+          </div> -->
+
+                    <!-- <div class="col-md-1">
+                <span>Ha</span>
+              </div> -->
+                </div>
+
+
+                <br>
+                <div style="margin-top: 3px">
+                    <h3>Average Farm Input</h3>
+                    <div id="farminput">
+                        <div class="row" style="margin-top: 3px">
+                            <!-- <div class="col-md-1">
+                <label>Seed :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Seed</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.seedInput" required id="seedInput" name="seedInput" required min="0">
+
+                                    <mat-hint align="end">Kg/ha</mat-hint>
+
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+
+                            <!-- <div class="col-md-1">
+                <label>DAP :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>DAP</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.dapInput" required name="dapInput" id="dapInput" min="0">
+                                    <mat-hint align="end">Kg/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Human Labor :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Human Labor</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.humanLaborInput" id="humanLaborInput" required name="dto_Agricultre.humanLaborInput" min="0">
+                                    <mat-hint align="end">Md/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Md/Ha</span>
+              </div> -->
+                        </div>
+
+                        <div class="row" style="margin-top: 3px">
+                            <!-- <div class="col-md-1">
+                <label>Organic Manure :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Organic Manure</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.organicManureInput" id="organicManureInput" required name="organicManureInput" min="0">
+                                    <mat-hint align="end">Kg/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+
+                            <!-- <div class="col-md-1">
+                <label>Potash :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Potash</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.potashInput" id="potashInput" name="potashInput" min="0" required>
+                                    <mat-hint align="end">Kg/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Animal Labor :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Animal Labor</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.animalLaborInput" id="animalLaborInput" name="animalLaborInput" min="0" required>
+                                    <mat-hint align="end">Md/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Md/Ha</span>
+              </div> -->
+                        </div>
+
+                        <div class="row" style="margin-top: 3px">
+                            <!-- <div class="col-md-1">
+                  <label>Cropping Intensity :</label>
+              </div> -->
+                            <!-- <div class="col-md-4">
+                <mat-form-field appearance="outline">
+                  <mat-label>Cropping Intensity %</mat-label>
+                  <input matInput type="number" required id="ureaInput" name="ureaInput"
+                    [(ngModel)]="dto_Agricultre.ureaInput" min="0" max="100">
+                  <mat-hint align="end">%</mat-hint>
+                </mat-form-field>
+              </div> -->
+
+                            <!-- <div class="col-md-1">
+                  <span>%</span>
+              </div> -->
+
+                            <!-- <div class="col-md-1">
+                <label>Urea :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Urea</mat-label>
+                                    <input matInput type="number" required id="ureaInput" name="ureaInput" [(ngModel)]="dto_Agricultre.ureaInput" min="0">
+                                    <mat-hint align="end">Kg/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Machine Labor :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Machine Labor </mat-label>
+                                    <input matInput type="number" id="machineLaborInput" name="machineLaborInput" [(ngModel)]="dto_Agricultre.machineLaborInput" required min="0">
+                                    <mat-hint align="end">Md/Ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Md/Ha</span>
+              </div> -->
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div style="margin-top: 3px">
+                    <h3>Pricing of Farm Input</h3>
+                    <div id="farminput">
+                        <div class="row" style="margin-top: 3px">
+                            <!-- <div class="col-md-1">
+                <label>Seed :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Seed </mat-label>
+                                    <input matInput type="number" required id="seedPrice" name="seedPrice" [(ngModel)]="dto_Agricultre.seedPrice" min="0">
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+
+                            <!-- <div class="col-md-1">
+                <label>DAP :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>DAP</mat-label>
+                                    <input matInput type="number" required id="dapPrice" name="dapPrice" [(ngModel)]="dto_Agricultre.dapPrice" min="0">
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Human Labor :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Human Labor</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.humanLaborPrice" id="humanLaborPrice" name="humanLaborPrice" min="0" required>
+
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- <div class="col-md-1">
+                <span>Md/Ha</span>
+              </div> -->
+                        </div>
+
+                        <div class="row" style="margin-top: 3px">
+                            <!-- <div class="col-md-1">
+                <label>Organic Manure :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Organic Manure</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.organicManurePrice" id="organicManurePrice" name="organicManurePrice" min="0" required>
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Potash :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Potash</mat-label>
+                                    <input matInput type="number" required id="potashPrice" name="potashPrice" [(ngModel)]="dto_Agricultre.potashPrice" min="0">
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Animal Labor :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Animal Labor</mat-label>
+                                    <input matInput type="number" required [(ngModel)]="dto_Agricultre.animalLaborPrice" id="animalLaborPrice" name="animalLaborPrice" min="0">
+
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Md/Ha</span>
+              </div> -->
+                        </div>
+
+                        <div class="row" style="margin-top: 3px">
+                            <!-- <div class="col-md-1">
+              </div>
+              <div class="col-md-3">
+              </div> -->
+
+                            <!-- <div class="col-md-1">
+                <label>Urea :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Urea</mat-label>
+                                    <input matInput type="number" required [(ngModel)]="dto_Agricultre.ureaPrice" id="ureaPrice" name="ureaPrice" min="0">
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Kg/Ha</span>
+              </div> -->
+                            <!-- <div class="col-md-1">
+                <label>Machine Labor :</label>
+              </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Machine Labor</mat-label>
+                                    <input matInput type="number" [(ngModel)]="dto_Agricultre.machineLaborPrice" id="machineLaborPrice" name="machineLaborPrice" min="0" required>
+                                    <mat-hint align="end">NRs/ha</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                <span>Md/Ha</span>
+              </div> -->
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+      {{ "Cancel" | localize }}
+    </button>
+        <div *ngIf="dto_Agricultre.id > 0 ; else SaveNewData">
+            <div *ngIf="ShowUpdateBtn">
+                <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!createRoleForm.form.valid || saving">
+          Update
+        </button>
+            </div>
+        </div>
+        <ng-template #SaveNewData>
+            <div *ngIf="ShowSaveBtn">
+                <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!createRoleForm.form.valid || saving">
+          {{ "Save" | localize }}
+        </button>
+            </div>
+        </ng-template>
+    </div>
+
+</form>

@@ -1,0 +1,180 @@
+<form autocomplete="off" #createRoleForm="ngForm" (ngSubmit)="save()" id="DataFormDiv">
+  <h1 mat-dialog-title> Spur</h1>
+  <!-- <h2>{{projectName}}</h2> -->
+
+  <div mat-dialog-content>
+    <div class="row-fluid">
+
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Spur No</mat-label>
+            <input matInput placeholder="Spur No" [(ngModel)]="Dto_Spur.no" required min="0" name="nos" type="number">
+            <mat-hint align="end"></mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>location (Chainage)</mat-label>
+            <input matInput placeholder="location" [(ngModel)]="Dto_Spur.locationChainage" required min="0"
+              name="locationChainage" type="number">
+            <mat-hint align="end">km</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Spacing</mat-label>
+            <input matInput placeholder="Spacing" type="number" [(ngModel)]="Dto_Spur.spacing" required min="0"
+              name="spacing">
+            <mat-hint align="end">m</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>HFL</mat-label>
+            <input matInput placeholder="HFL" type="number" [(ngModel)]="Dto_Spur.hfl" required min="0" name="hfl">
+            <mat-hint align="end">m</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>LWL</mat-label>
+            <input matInput placeholder="LWL" type="number" [(ngModel)]="Dto_Spur.lwl" required min="0" name="lwl">
+            <mat-hint align="end">m</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <h4>Type</h4>
+      <div class="row col-md-12">
+        <mat-radio-group [(ngModel)]="Dto_Spur.types" required name="types">
+          <div class="col-md-2">
+            <mat-radio-button value="Attracting">Attracting</mat-radio-button>
+          </div>
+          <div class="col-md-2">
+            <mat-radio-button value="Deflecting">Deflecting</mat-radio-button>
+          </div>
+          <div class="col-md-2">
+            <mat-radio-button value="Repelling">Repelling</mat-radio-button>
+          </div>
+          <div class="col-md-2">
+            <mat-radio-button value="Sedimenting">Sedimenting</mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+      <br><br>
+
+      <h4>Material</h4>
+      <div class="row col-md-12">
+        <mat-radio-group [(ngModel)]="Dto_Spur.materails" required name="materails">
+          <div class="col-md-2">
+            <mat-radio-button value="Permeable">Permeable</mat-radio-button>
+          </div>
+          <div class="col-md-2">
+            <mat-radio-button value="Impermeable">Impermeable</mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+      <br>
+      <br>
+
+      <h4>Condition</h4>
+      <div class="row col-md-12">
+        <mat-radio-group [(ngModel)]="Dto_Spur.conditions" required name="conditions" aria-label="Select an option">
+          <div class="col-md-2">
+            <mat-radio-button value="Submerged">Submerged</mat-radio-button>
+          </div>
+          <div class="col-md-2">
+            <mat-radio-button value="Non-submerged">Non-submerged</mat-radio-button>
+          </div>
+        </mat-radio-group>
+      </div>
+      <br>
+      <br>
+
+      <h4>Design Parameters</h4>
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Top Width</mat-label>
+            <input matInput placeholder="Top Width" [(ngModel)]="Dto_Spur.designTopWidth" required min="0"
+              name="designTopWidth" type="number">
+            <mat-hint align="end">m</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Freeboard</mat-label>
+            <input matInput placeholder="Freeboard" type="number" [(ngModel)]="Dto_Spur.designFreeboard" required
+              min="0" name="designFreeboard">
+            <mat-hint align="end">m</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Side Slope 1:</mat-label>
+            <input matInput placeholder="Side Slope 1:" type="string" [(ngModel)]="Dto_Spur.slideSlope1" required
+              min="0" name="slideSlope1">
+            <mat-hint align="end">V:H</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Length of Launching Apron</mat-label>
+            <input matInput placeholder="Length of Launching Apron" type="number"
+              [(ngModel)]="Dto_Spur.lengthOfLaunchingApron" required min="0" name="lengthOfLaunchingApron">
+            <mat-hint align="end">mm</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row col-md-12">
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Thickness of Pitching</mat-label>
+            <input matInput placeholder="Thickness of Pitching" type="number" [(ngModel)]="Dto_Spur.thicknessOfPitching"
+              required min="0" name="thicknessOfPitching">
+            <mat-hint align="end">mm</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field appearance="outline">
+            <mat-label>Thickness of Filter</mat-label>
+            <input matInput placeholder="Thickness of Filter" type="number" [(ngModel)]="Dto_Spur.thicknessOfFilter"
+              required min="0" name="thicknessOfFilter">
+            <mat-hint align="end">mm</mat-hint>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <div *ngIf="Dto_Spur.id > 0 ; else SaveNewData">
+      <div *ngIf="showUpdateBtn">
+        <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!createRoleForm.form.valid || saving">
+          Update
+        </button></div>
+    </div>
+    <ng-template #SaveNewData>
+      <div *ngIf="showSaveBtn">
+        <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!createRoleForm.form.valid || saving">
+          {{ "Save" | localize }}
+        </button></div>
+    </ng-template>
+    <button mat-button type="button" [disabled]="saving" (click)="onNoClick()">
+      {{ "Cancel" | localize }}
+    </button>
+  </div>
+</form>

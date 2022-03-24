@@ -1,0 +1,87 @@
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <mat-card>
+    <mat-tab-group dynamicHeight>
+      <mat-tab label="{{projectName}} -> Social Information">
+        <!-- <div class="header">
+          <h2 ><b>{{projectName}} -> Social Information</b></h2>
+          <ul class="header-dropdown m-r--5">
+            <li>
+              <button
+                mat-icon-button
+                [matMenuTriggerFor]="headerMenu"
+                class="header-dropdown-mat-icon-button"
+              >
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #headerMenu="matMenu">
+                <button mat-menu-item (click)="refresh()">
+                  <mat-icon>refresh</mat-icon>
+                  <span>Refresh</span>
+                </button>
+              </mat-menu>
+            </li>
+          </ul>
+        </div> -->
+        <div class="body table">
+          <div class="row clearfix" [@routerTransition]>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+              <br>
+              <div class="body" style="margin-left: 1em;">
+                <div *ngIf="ShowSaveBtn || ShowUpdateBtn">
+                  <button mat-button class="btn btn-primary" (click)="addNewSocialInfoData()">Add</button><br>
+                </div>
+                <div>
+
+                  <div class="body" style=" padding: 1em">
+                    <table class="table table-hover table-striped" [busy]="isTableLoading">
+                      <thead>
+                        <tr>
+                          <th>Year of Survey</th>
+                          <th>No of HouseHold</th>
+                          <th>Total Population</th>
+                          <th>Average Family Size</th>
+                          <th>Literacy Rate</th>
+                          <th>Surplus </th>
+                          <th>Deficit </th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let lis of SocialInfosList">
+                          <td>{{ lis.yearOfSurvey }}</td>
+                          <td>{{ lis.noOfHousehold }}</td>
+                          <td>{{ lis.totalPopulation }}</td>
+                          <td>{{ lis.majorSourceOfIncome }}</td>
+                          <td>{{ lis.literacyRate }} %</td>
+                          <td>{{ lis.maleLiteracyRate }} %</td>
+                          <td>{{ lis.femaleLiteracyRate }} %</td>
+                          <td>
+                            <button mat-button class="btn btn-info" type="button" (click)="editInfo(lis)">
+                              <!-- <mat-icon>edit</mat-icon> -->
+                              <span>View</span>
+                            </button>
+                            <!-- <button mat-menu-item (click)="editInfo(lis)">
+                                      <mat-icon>delete</mat-icon>
+                                    </button> -->
+                            <!-- <button mat-menu-item (click)="editInfo(lis)">
+                                      <mat-icon>trash</mat-icon>
+                                      <span>Delete</span>
+                                    </button> -->
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <button mat-stroked-button color="warn" (click)="exportAsXLSX()">Export Data</button>
+
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

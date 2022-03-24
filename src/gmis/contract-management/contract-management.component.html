@@ -1,0 +1,535 @@
+<div class="row clearfix" [@routerTransition]>
+
+  <div class="col-md-12">
+    <mat-card>
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="{{projectName}} -> Contract Management">
+          <div class="body ">
+
+            <form class="form-horizontal" [formGroup]="ContractMgmtForm" (ngSubmit)="save()">
+
+              <div class="example-container">
+                <br>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Project Cost</mat-label>
+                      <input matInput placeholder="Project Cost" formControlName="projectCost" required
+                        autocomplete="off" min="0" (keyup)="MoneyValidator('projectCost')">
+                      <mat-hint align="end">NRs</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 "> <span>
+                      <h4>Financial Arrangement</h4>
+                    </span> </div>
+
+                  <div class="row col-md-12">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>GON</mat-label>
+                        <input matInput placeholder="GON" formControlName="financialGON"
+                          (keyup)="MoneyValidator('financialGON')" min="0">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Donor</mat-label>
+                        <input matInput placeholder="Donor" formControlName="financialDonar"
+                          (keyup)="MoneyValidator('financialDonar')" min="0">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row col-md-12">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>WUA</mat-label>
+                        <input matInput placeholder="WUA" formControlName="financialWUA"
+                          (keyup)="MoneyValidator('financialWUA')" min="0">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline" class="example-full-width">
+                        <mat-label>Others</mat-label>
+                        <input matInput placeholder="Others" formControlName="financialOthers"
+                          (keyup)="MoneyValidator('financialOthers')" min="0">
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 "> <span>
+                      <h4>Contract Packaging</h4>
+                    </span> </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 ">
+                    <mat-form-field appearance="outline">
+                      <mat-label>ICB Contract</mat-label>
+                      <input matInput placeholder="ICB Contract" formControlName="icbNumber" required
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 ">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Estimated Cost</mat-label>
+                      <input matInput placeholder="Estimated Cost"
+                        (keyup)="MoneyValidator('icbEstimatedCost')" min="0" formControlName="icbEstimatedCost" required
+                        autocomplete="off">
+                      <mat-hint align="end">Nrs</mat-hint>
+
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 ">
+                    <mat-form-field appearance="outline">
+                      <mat-label>NCB Contract</mat-label>
+                      <input matInput placeholder="NCB Contract" formControlName="ncbNumber" required
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 ">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Estimated Cost</mat-label>
+                      <input matInput placeholder="Estimated Cost" formControlName="ncbEstimatedCost" required
+                        autocomplete="off" (keyup)="MoneyValidator('ncbEstimatedCost')" min="0">
+                      <mat-hint align="end">Nrs</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row col-md-12 ">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>WUA Contract</mat-label>
+                      <input matInput placeholder="WUA Contract" formControlName="wuaNumber" required
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6 ">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Estimated Cost</mat-label>
+                      <input matInput placeholder="Estimated Cost" formControlName="wuaEstimatedCost" required
+                        autocomplete="off" (keyup)="MoneyValidator('wuaEstimatedCost')" min="0">
+                      <mat-hint align="end">Nrs</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 "> <span>
+                      <h4>Contract Information</h4>
+                    </span> </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Contract ID</mat-label>
+                      <input matInput placeholder="Contract Id" formControlName="contractId" required
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Contract Name</mat-label>
+                      <input matInput placeholder="Contract Name" formControlName="contractName" required
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row col-md-12">
+
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Contractor's Name</mat-label>
+                      <input matInput placeholder="Contractors Name" formControlName="contractorName"
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Agrement Date</mat-label>
+                      <input matInput formControlName="agreementDate" name="agreementDate" [max]="today_date"
+                        [matDatepicker]="agreementdates" autocomplete="Off" required readonly>
+                      <mat-datepicker-toggle matSuffix [for]="agreementdates"></mat-datepicker-toggle>
+                      <mat-datepicker #agreementdates></mat-datepicker>
+                      <mat-error>Agreement Date is required</mat-error>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Contract Type</mat-label>
+                      <input matInput placeholder="ICB , NCB , WUA" type="text" formControlName="contractType" required
+                        autocomplete="off">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label for="contractMethod">Contract Method</mat-label>
+                      <mat-select required formControlName="contractMethod">
+                        <!-- <mat-option *ngFor="let program of programTypes" [value]="program.id">{{ program.name }}</mat-option> -->
+                        <mat-option [value]="'Designed By Employer'">Designed By Employer</mat-option>
+                        <mat-option [value]="'Designed By Contractor'">Designed By Contractor</mat-option>
+                        <mat-option [value]="'Engineering Procurement and Construction'">Engineering Procurement and
+                          Construction</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+
+                </div>
+
+
+                <div class="row col-md-12">
+                  <div class="col-sm-6 ">
+                    <span>
+                      <h4>Variation</h4>
+                    </span>
+                    <mat-radio-group formControlName="isVariation" (change)="onVariationChange($event.value)">
+                      <mat-radio-button [value]="true" [checked]="ContractMgmtForm.get('isVariation').value == 'true'">
+                        Yes
+                      </mat-radio-button>
+                      <mat-radio-button [value]="false"
+                        [checked]="ContractMgmtForm.get('isVariation').value == 'false'">
+                        No
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+
+                <div *ngIf="ContractMgmtForm.get('isVariation').value" style="padding: 1em">
+                  <mat-card>
+
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Number Of Variation</mat-label>
+                          <input matInput placeholder="Number Of Variation" type="number"
+                            [required]="ContractMgmtForm.get('isVariation').value" formControlName="noOfTimesExtension">
+                          <mat-hint align="end">times</mat-hint>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Initial Contract Amount</mat-label>
+                          <input matInput placeholder="Initial Contract Amount" min="0"
+                            formControlName="initialContractAmnt" (keyup)="MoneyValidator('initialContractAmnt')">
+                          <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Variation Amount</mat-label>
+                          <input matInput placeholder="Variation Amount" min="0"
+                            [required]="ContractMgmtForm.get('variationAmnt').value" formControlName="variationAmnt"
+                            (keyup)="MoneyValidator('variationAmnt')">
+                          <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Final Contract Amount</mat-label>
+                          <input matInput placeholder="Final Contract Amount" min="0"
+                            formControlName="finalContractAmnt" (keyup)="MoneyValidator('finalContractAmnt')">
+                          <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Approved Date</mat-label>
+                          <input matInput formControlName="contractVariationApprovedDate"
+                            name="contractVariationApprovedDates" [max]="today_date"
+                            [required]="ContractMgmtForm.get('isVariation').value"
+                            [matDatepicker]="contractVariationApprovedDates" autocomplete="Off" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="contractVariationApprovedDates">
+                          </mat-datepicker-toggle>
+                          <mat-datepicker #contractVariationApprovedDates></mat-datepicker>
+                          <mat-error>Due Date is required</mat-error>
+                        </mat-form-field>
+
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Approved By</mat-label>
+                          <input matInput placeholder="Approved By" type="text"
+                            formControlName="contractVariationApprovedBy" autocomplete="off">
+                          <!-- <span matSuffix>NRs</span> -->
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Reasons for Variation</mat-label>
+                          <textarea matInput placeholder="Note" autocomplete="off"
+                            formControlName="reasonsForContractVariation"
+                            placeholder="Reasons for Variation"></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <span>
+                          <h5>Contract Status </h5>
+                        </span>
+
+                        <mat-radio-group [required]="ContractMgmtForm.get('isVariation').value"
+                          formControlName="contractStatus">
+                          <mat-radio-button [value]="false">Ongoing</mat-radio-button>
+                          <mat-radio-button [value]="true">Completed</mat-radio-button>
+                        </mat-radio-group>
+                      </div>
+                    </div>
+
+                  </mat-card>
+                </div>
+
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 "> <span>
+                      <h4> Physical Progress</h4>
+                    </span> </div>
+                </div>
+                <div class="col-md-12" style="padding-right: 1em">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Physical Progress Note</mat-label>
+                    <textarea matInput placeholder="Note" autocomplete="off"
+                      formControlName="physicalProgressNote"></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Physical Progress</mat-label>
+                      <input matInput placeholder="Physical Progress"
+                        (keyup)="PercentValidator('physicalProgressPercent')" max="100" min="0"
+                        formControlName="physicalProgressPercent">
+                      <mat-hint align="end">%</mat-hint>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Physical Progress Date</mat-label>
+                      <input matInput formControlName="physicalProgressDate" [max]="today_date" [matDatepicker]="picker"
+                        autocomplete="Off" required readonly>
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <mat-error>Physical Progress Date is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 "> <span>
+                      <h4> Financial Progress</h4>
+                    </span> </div>
+                </div>
+
+                <div class="col-md-12">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Financial Progress Note</mat-label>
+                    <textarea matInput placeholder="Note" formControlName="financialProgressNote" required></textarea>
+                  </mat-form-field>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Financial Progress</mat-label>
+
+                      <input matInput placeholder="Financial Progress" min="0" max="100" required
+                        formControlName="financialProgressPercent"
+                        (keyup)="PercentValidator('financialProgressPercent')">
+                      <mat-hint align="end">%</mat-hint>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline" class="example-full-width">
+                      <mat-label>Financial Progress Date</mat-label>
+                      <input matInput formControlName="financialProgressDate" name="financialProgressDate"
+                        [max]="today_date" [matDatepicker]="picker1" autocomplete="Off" required readonly
+                        placeholder="Financial Progress Date">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                      <mat-error>Financial Progress Date is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-md-6">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Financial Progress Amount</mat-label>
+                      <input matInput placeholder="Financial Progress Amount" min="0" required
+                        formControlName="financialProgressAmount" (keyup)="MoneyValidator('financialProgressAmount')">
+                      <mat-hint align="end">Nrs</mat-hint>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+
+
+                <div class="row col-md-12">
+                  <div class="col-md-6 "> <span>
+                      <h4>Time Extension</h4>
+                    </span>
+                  </div>
+                </div>
+
+                <div class="row col-md-12">
+                  <div class="col-sm-6 ">
+                    <span>
+                      <h4>Is there time Extension ? </h4>
+                    </span>
+                    <mat-radio-group formControlName="isTimeVariation" (change)="onTimeVariationChange($event)">
+                      <!-- <mat-radio-button value="true" [checked]="true" >Yes</mat-radio-button> -->
+                      <mat-radio-button [value]="true"
+                        [checked]="ContractMgmtForm.get('isTimeVariation').value == 'true'">
+                        Yes
+                      </mat-radio-button>
+                      <mat-radio-button [value]="false"
+                        [checked]="ContractMgmtForm.get('isTimeVariation').value == 'false'">No
+                      </mat-radio-button>
+                      <!-- <mat-radio-button value="false"  >No</mat-radio-button> -->
+                    </mat-radio-group>
+                  </div>
+                </div>
+
+                <div style="padding: 1em" *ngIf="ContractMgmtForm.get('isTimeVariation').value">
+                  <mat-card>
+
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>No Of Time Extension</mat-label>
+                          <input matInput placeholder="No Of Time Extension" type="number" min="0"
+                            [required]="ContractMgmtForm.get('isVariation').value" formControlName="noOfTimeExtension">
+                          <mat-hint align="end">times</mat-hint>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Initial Due Date</mat-label>
+                          <input matInput formControlName="timeVariationInitialDueDate"
+                            name="timeVariationInitialDueDates" [required]="ContractMgmtForm.get('isVariation').value"
+                            [matDatepicker]="timeVariationInitialDueDates" autocomplete="Off" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="timeVariationInitialDueDates"></mat-datepicker-toggle>
+                          <mat-datepicker #timeVariationInitialDueDates></mat-datepicker>
+                          <mat-error>Initial Due Date is required</mat-error>
+                        </mat-form-field>
+
+                      </div>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Extended Due Date</mat-label>
+                          <input matInput formControlName="timeVariationExtendedDueDate"
+                            name="timeVariationExtendedDueDate" [required]="ContractMgmtForm.get('isVariation').value"
+                            [matDatepicker]="timeVariationExtendedDueDate" autocomplete="Off" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="timeVariationExtendedDueDate"></mat-datepicker-toggle>
+                          <mat-datepicker #timeVariationExtendedDueDate></mat-datepicker>
+                          <mat-error>Extended Due Date is required</mat-error>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline" class="example-full-width">
+                          <mat-label>Approved Date</mat-label>
+                          <input matInput formControlName="timeVariationApprovedDate" name="timeVariationApprovedDates"
+                            [max]="today_date" [required]="ContractMgmtForm.get('isVariation').value"
+                            [matDatepicker]="timeVariationApprovedDates" autocomplete="Off" readonly>
+                          <mat-datepicker-toggle matSuffix [for]="timeVariationApprovedDates"></mat-datepicker-toggle>
+                          <mat-datepicker #timeVariationApprovedDates></mat-datepicker>
+                          <mat-error>Approved Date is required</mat-error>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Approved By</mat-label>
+                          <input matInput placeholder="Approved By" type="text"
+                            formControlName="timeVariationApprovedBy">
+                          <!-- <span matSuffix>NRs</span> -->
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-md-12" style="padding-left: 1em">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Reasons for Time Extension</mat-label>
+                          <textarea matInput formControlName="reasonsForTimeExtension"
+                            placeholder="Reasons for Time Extension"></textarea>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                  </mat-card>
+                </div>
+
+                <div class="col-md-12">
+
+                  <div class="form-group">
+                    <div *ngIf="ContractMgmtForm.get('id').value > 0; else showSaveBtn1">
+                      <div *ngIf="ShowUpdateBtn">
+                        <button mat-flat-button type="submit" flex="15" color="primary"
+                          [disabled]="ContractMgmtForm.invalid || saving">
+                          Update
+                        </button>
+                      </div>
+                    </div>
+
+                    <ng-template #showSaveBtn1>
+                      <div *ngIf="ShowSaveBtn">
+                        <button mat-flat-button type="submit" flex="15" color="primary"
+                          [disabled]="ContractMgmtForm.invalid || saving">
+                          {{ "Save" | localize }}
+                        </button>
+                      </div>
+                    </ng-template>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+              <!-- </mat-card> -->
+            </form>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,276 @@
+<div class="row clearfix" [@routerTransition]>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-md-12">
+    <mat-card>
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="{{projectName}} -> WUA Information">
+          <!-- <div class="header">
+            <h2 ><b>{{projectName}} -> WUA Information</b></h2>
+            <ul class="header-dropdown m-r--5">
+              <li>
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="headerMenu"
+                  class="header-dropdown-mat-icon-button"
+                >
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #headerMenu="matMenu">
+                  <button mat-menu-item (click)="refresh()">
+                    <mat-icon>refresh</mat-icon>
+                    <span>Refresh</span>
+                  </button>
+                </mat-menu>
+              </li>
+            </ul>
+          </div> -->
+          <div class="body table">
+
+            <br>
+            <div class="body" style="margin-left: 1em;">
+
+              <div id="WUAInfoDiv">
+                <form class="form-horizontal" #contractInfoForm="ngForm" (ngSubmit)="saveWUAInfo()">
+                  <div class="row col-md-12">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="Name" type="text"  autocomplete="off" name="dto_WUAInfo.names"
+                          [(ngModel)]="dto_WUAInfo.name" required id="names">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Number of WUA members</mat-label>
+                        <input matInput placeholder="Number of WUA members" type="number" min="0"
+                          name="dto_WUAInfo.noOfWUAMembers" [(ngModel)]="dto_WUAInfo.noOfWUAMembers" required
+                          id="noOfWUAMembers">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Number of Female Members</mat-label>
+                        <input matInput placeholder="Number of Female Members" type="number" min="0"
+                          name="dto_WUAInfo.noOffemaleMembers" [(ngModel)]="dto_WUAInfo.noOffemaleMembers" required
+                          id="noOffemaleMembers">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Registration Place</mat-label>
+                        <input matInput placeholder="Registration Place" autocomplete="off" type="text"
+                          name="dto_WUAInfo.registrationPlace" [(ngModel)]="dto_WUAInfo.registrationPlace" required
+                          id="registrationPlace">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Registration Date</mat-label>
+                        <input matInput [(ngModel)]="registrationDate" name="registrationDate" [max]="today_date"
+                          [matDatepicker]="picker" autocomplete="Off" required readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error>WUA Registration Date is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Renewed Up-To Date</mat-label>
+                        <input matInput [(ngModel)]="RenewedUpDate" name="RenewedUpDate" [max]="today_date"
+                          [matDatepicker]="picker112" autocomplete="Off" required readonly>
+                        <mat-datepicker-toggle matSuffix [for]="picker112"></mat-datepicker-toggle>
+                        <mat-datepicker #picker112></mat-datepicker>
+                        <mat-error>Renewed Up-To Date is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>President Name</mat-label>
+                        <input matInput placeholder="President Name"  type="text" name="dto_WUAInfo.presidentName"
+                          [(ngModel)]="dto_WUAInfo.presidentName" required id="presidentName">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Contact Number</mat-label>
+                        <input matInput placeholder="Contact Number"  autocomplete="off" type="text" name="dto_WUAInfo.contactNumber"
+                          [(ngModel)]="dto_WUAInfo.contactNumber" required id="contactNumber">
+                      </mat-form-field>
+                    </div>
+
+                    <!-- <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>WUA Development Office</mat-label>
+                  <input matInput placeholder="(Name,Number of WUA Member, Registration Place)"
+                    name="dto_WUAInfo.wuaDetail" [(ngModel)]="dto_WUAInfo.wuaDetail" id="wuaDetail" required>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>WUA Registration Date</mat-label>
+                  <input matInput [(ngModel)]="registrationDate" name="registrationDate" [max]="today_date"
+                    [matDatepicker]="picker" autocomplete="Off" required readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error>WUA Registration Date is required</mat-error>
+                </mat-form-field>
+              </div> -->
+                  </div>
+
+                  <div class="row" style="margin-left: 1em">
+                    <div class="col-md-6">
+                      <div *ngIf="dto_WUAInfo.id > 0 ; else SaveNewData">
+                        <div *ngIf="ShowUpdateBtn">
+                          <button mat-flat-button type="submit" flex="15" color="primary"
+                            [disabled]="!contractInfoForm.form.valid || saving">
+                            Update
+                          </button>
+                        </div>
+                      </div>
+                      <ng-template #SaveNewData>
+                        <div *ngIf="ShowSaveBtn">
+                          <button mat-flat-button type="submit" flex="15" color="primary"
+                            [disabled]="!contractInfoForm.form.valid || saving">
+                            {{ "Save" | localize }}
+                          </button>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <br>
+              <div class="alert alert-info" *ngIf="!(dto_WUAInfo.id > 0)"
+                style="color: #004085 !important; background-color: #cce5ff !important;">
+                <h3>Please Add WUA Registration Information First</h3>
+              </div>
+              <hr>
+
+              <div>
+                <h3>WUA Trainings</h3>
+
+                <form class="form-horizontal" #TrainingForm="ngForm" (ngSubmit)="saveTrainings()">
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Training Name</mat-label>
+                        <input matInput type="text" autocomplete="off" name="dto_WUATraining.trainingName"
+                          [(ngModel)]="dto_WUATraining.trainingName" required id="trainingName">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Training Date</mat-label>
+                        <input matInput [(ngModel)]="TrainingDate" name="TrainingDate" [matDatepicker]="picker2"
+                          autocomplete="Off" required readonly [min]="registrationDateSavedToDB">
+                        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2></mat-datepicker>
+                        <mat-error>Training Date is required</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>Training Period</mat-label>
+                        <input matInput type="number" name="dto_WUATraining.trainingPeriod"
+                          [(ngModel)]="dto_WUATraining.trainingPeriod" required id="trainingPeriod" min="0">
+
+                        <mat-hint align="end">Days</mat-hint>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>No of Participants</mat-label>
+                        <input matInput type="number" [(ngModel)]="dto_WUATraining.noOfParticipants"
+                          name="dto_WUATraining.noOfParticipants" min="0" required>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                      <mat-form-field appearance="outline">
+                        <mat-label>No of Female Participants</mat-label>
+                        <input matInput type="number" placeholder="No of Female Participants"
+                          [(ngModel)]="dto_WUATraining.noOfFemaleParticipant"
+                          name="dto_WUATraining.noOfFemaleParticipant" min="0" [max]="dto_WUATraining.noOfParticipants"
+                          required>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin-left: 1em" *ngIf="dto_WUAInfo.id > 0">
+                    <div class="col-md-6">
+                      <div *ngIf="dto_WUATraining.id > 0 ; else SaveNewData23">
+                        <div *ngIf="ShowUpdateBtn">
+                          <button mat-flat-button type="submit" flex="15" color="primary"
+                            [disabled]="!TrainingForm.form.valid || saving1">
+                            Update
+                          </button>
+                        </div>
+                      </div>
+                      <ng-template #SaveNewData23>
+                        <div *ngIf="ShowSaveBtn">
+                          <button mat-flat-button type="submit" flex="15" color="primary"
+                            [disabled]="!TrainingForm.form.valid || saving1">
+                            {{ "Save" | localize }}
+                          </button>
+                        </div>
+                      </ng-template>
+                    </div>
+                    <div class="col-md-6" *ngIf="ShowUpdateBtn || ShowSaveBtn">
+                      <button mat-flat-button type="button" flex="15" color="primary" (click)="getNewTrainingInstance()">
+                        New
+                      </button>
+                    </div>
+                  </div>
+
+                </form>
+
+                <hr>
+
+
+                <div class="body table-responsive" style="padding: 1em;">
+                  <table class="table table-hover table-striped" [busy]="isTableLoading">
+                    <thead>
+                      <tr>
+                        <th>S.N</th>
+                        <th>Training Name</th>
+                        <th>Training Period (Days)</th>
+                        <th>No of Participants</th>
+                        <th>No of Female Participants</th>
+                        <th>Training Date</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let training of dto_WUATrainings;let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ training.trainingName }}</td>
+                        <td>
+                          {{ training.trainingDate | date }}
+                        </td>
+
+                        <td>{{ training.trainingPeriod }}</td>
+                        <td>{{ training.noOfFemaleParticipant }}</td>
+                        <td>{{ training.noOfParticipants }}</td>
+                        
+                        <td> <button mat-menu-item (click)="getTrainingDataForEdit(training)">
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                  </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <button mat-stroked-button color="warn" (click)="exportAsXLSX()">Export Data</button>
+
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div>

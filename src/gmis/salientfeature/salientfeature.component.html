@@ -1,0 +1,210 @@
+<div class="row clearfix" [@routerTransition]>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <mat-card>
+            <button class="btn btn-primary pull-right " (click)="export2Word()">Print</button>
+            <mat-tab-group dynamicHeight>
+                <mat-tab label="Sailent Feature">
+
+                    <!-- <div class="header">
+            <h2 ><b>Sailent Feature</b></h2>
+            <ul class="header-dropdown m-r--5">
+              <li>
+                <button
+                  mat-icon-button
+                  [matMenuTriggerFor]="headerMenu"
+                  class="header-dropdown-mat-icon-button"
+                >
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #headerMenu="matMenu">
+                  <button mat-menu-item (click)="refresh()">
+                    <mat-icon>refresh</mat-icon>
+                    <span>Refresh</span>
+                  </button>
+                </mat-menu>
+              </li>
+            </ul>
+          </div> -->
+                    <div class="body table-responsive" id="tblPrint">
+
+                        <div class="col-md-12">
+                            <div class="body">
+                                <div class="row">
+                                    <table class="table table-bordered">
+                                        <tr>
+                                            <td>
+                                                <b>Sub-Project Name </b>
+                                            </td>
+
+                                            <td>:</td>
+                                            <td>{{ projectName }} </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Sub-Project Type</b></td>
+                                            <td>:</td>
+                                            <td> {{ projectInformation.project_type }} </td>
+                                        </tr>
+
+
+                                        <tr *ngFor="let items of TestLists; let i = index">
+                                            <td><b>Location</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ items.provienceName}},{{ items.districtName}},{{ items.localBodyName}},Ward:- {{ items.wardName}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Gross Command Area</b></td>
+                                            <td>:</td>
+                                            <td> {{ projectInformation.commandarea_gca }} ha </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td><b>Net Command Area</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ projectInformation.commandarea_nca }} ha
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Name of River Source</b> </td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ LocationInfoDto.riverSource }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Catchment Area</b> </td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ RiverHydrologyDto.catchmentArea }} km<sup>2</sup>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Design Flood Discharge</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ RiverHydrologyDto.designFloodDischarge }} cumecs
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Head Works Type </b></td>
+                                            <td>:</td>
+                                            <td>
+                                                <!-- <div *ngIf="Dto_HeadWork.headWorksType == 'Others'"></div> headWorksTypeOther -->
+                                                {{ Dto_HeadWork.headWorksType }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Main Canal Length</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ MainCanalLength }} km
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Main Canal Discharge</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ MainCanalDischarge }} lps
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <b>Total Project Cost:</b>
+                                                <br>Government of Nepal:
+                                                <br>Donor share:
+                                                <br>WUA Contribution:
+                                                <br>Others
+                                            </td>
+
+                                            <td></td>
+                                            <td>
+                                                <b>Nrs {{ dto_ContractManagement.projectCost}}</b>
+                                                <br>Nrs {{ dto_ContractManagement.financialGON}}
+                                                <br>Nrs {{ dto_ContractManagement.financialDonar}}
+                                                <br>Nrs {{ dto_ContractManagement.financialWUA}}
+                                                <br>Nrs {{ dto_ContractManagement.financialOthers}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Total Number of Household</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ Dto_SocialInfoDetailListModel.noOfHousehold }}
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Total Population</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ Dto_SocialInfoDetailListModel.totalPopulation }} ({{ Dto_SocialInfoDetailListModel.yearOfSurvey }})
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Major Crops</b></td>
+                                            <td>:</td>
+                                            <td>
+
+                                                <div *ngFor="let items of ExistingCrop_AgricultreInfos; let i = index">
+                                                    {{ items.cropIdName }} </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td><b>Crop Intensity (Before Project Implementation)</b></td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ Dto_AgricultureDetail.existingCropIntensity }} %</td>
+                                        </tr>
+
+
+
+                                        <tr>
+
+                                            <td><b>Crop Intensity(After Project Implementation)</b> </td>
+                                            <td>:</td>
+                                            <td>
+                                                {{ Dto_AgricultureDetail.proposedCropIntensity }} %</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>Economic Internal Rate of Return (EIRR)</b></td>
+                                            <td>:</td>
+                                            <td>{{ Dto_EconomicInfo.eirr }} ({{ Dto_EconomicInfo.costingYear }})</td>
+                                        </tr>
+                                        <tr>
+
+                                            <td><b>B/C Ratio at 10% Discount Rate</b> </td>
+                                            <td>:</td>
+                                            <td>{{ Dto_EconomicInfo.bC1 }} </td>
+
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-tab>
+            </mat-tab-group>
+        </mat-card>
+    </div>
+</div>

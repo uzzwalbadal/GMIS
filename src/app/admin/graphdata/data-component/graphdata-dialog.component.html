@@ -1,0 +1,66 @@
+<form autocomplete="off" #createRoleForm="ngForm" (ngSubmit)="save()">
+    <h1 mat-dialog-title>Graph Data</h1>
+    <!-- <div *ngIf="Dto_GraphData.iType == 1">
+        <h1 mat-dialog-title>
+            कृषि योग्य, सिंचित योग्य, सिचित क्षेत्र
+        </h1>
+    </div>
+    <div *ngIf="Dto_GraphData.iType == 2">
+        <h1 mat-dialog-title>
+            कुल सिचित क्षेत्र
+        </h1>
+    </div>
+    <div *ngIf="Dto_GraphData.iType == 3">
+        <h1 mat-dialog-title>
+            सिचित क्षेत्रको बिस्तार
+        </h1>
+    </div> -->
+    <mat-dialog-content style="width:600px;">
+        <div class="row-fluid">
+            <div class="col-md-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Display Name</mat-label>
+                    <input matInput name="displayName" placeholder="Display Name" [(ngModel)]="Dto_GraphData.displayName" required minlength="2" maxlength="32" />
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Select Type</mat-label>
+                    <mat-select required name="iType" [(ngModel)]="Dto_GraphData.iType">
+                        <mat-option [value]="1">कृषि योग्य, सिंचित योग्य, सिंचित क्षेत्र </mat-option>
+                        <mat-option [value]="2">कुल सिचित क्षेत्र</mat-option>
+                        <mat-option [value]="3"> सिंचित क्षेत्रको बिस्तार </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Values</mat-label>
+                    <input matInput placeholder="Values Order" type="number" name="dataValues" [(ngModel)]="Dto_GraphData.dataValues" required min="0" />
+                </mat-form-field>
+            </div>
+            <div class="col-md-12">
+                <mat-form-field appearance="outline">
+                    <mat-label>Display Order</mat-label>
+                    <input matInput placeholder="Display Order" type="number" name="displayOrder" [(ngModel)]="Dto_GraphData.displayOrder" required min="0" />
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" [disabled]="saving" (click)="close(0)">
+            {{ "Cancel" | localize }}
+        </button>
+
+        <div *ngIf="Dto_GraphData.id > 0 ; else SaveNewData">
+            <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!createRoleForm.form.valid || saving">
+                Update
+            </button>
+        </div>
+        <ng-template #SaveNewData>
+            <button mat-flat-button type="submit" flex="15" color="primary" [disabled]="!createRoleForm.form.valid || saving">
+                {{ "Save" | localize }}
+            </button>
+        </ng-template>
+    </div>
+</form>

@@ -1,0 +1,201 @@
+<div class="row clearfix" [@routerTransition]>
+  <div class="">
+    <mat-card>
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="{{projectName}} -> Economic Information">
+
+          <div class="">
+            <br>
+            <div class="col-md-12">
+
+
+              <div class="" style="margin-left: 1em;">
+                <form class="form-horizontal" [formGroup]="EconomicInfoForm" (ngSubmit)="save()">
+
+                  <div>
+
+                    <div class="form-group row">
+                      <!-- <div class="col-md-2">
+                  <label>Costing Year :</label>
+                </div> -->
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Costing Year</mat-label>
+                          <mat-select name="CreateEconomicDto.costingYear" formControlName="costingYear">
+                            <mat-option *ngFor="let yrs of CostingYear" [value]="yrs">{{yrs}}</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Total Project Cost</mat-label>
+                          <input matInput placeholder="Total Project Cost" formControlName="totalProjectCost" required
+                            autocomplete="off" min="0" (keyup)="MoneyValidator('totalProjectCost')">
+                          <mat-hint align="end">NRs</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>B/C 1</mat-label>
+                          <input matInput min="0" placeholder="B/C 1" autocomplete="off" formControlName="bC1"
+                            type="number" min="0" required>
+                          <mat-hint align="end">(e.g. 2.3)</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Discount Rate 1</mat-label>
+                          <input matInput placeholder="Discount Rate 1" formControlName="discountRate1" required
+                            autocomplete="off" min="0" (keyup)="PercentValidator('discountRate1')">
+                          <mat-hint align="end">%</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>B/C 2</mat-label>
+                          <input matInput placeholder="B/C 2" min="0" type="number" formControlName="bC2" required>
+                          <mat-hint align="end">(e.g. 2.3)</mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Discount Rate2</mat-label>
+                          <input matInput placeholder="Discount Rate2" min="0"
+                            (keyup)="PercentValidator('discountRate2')" formControlName="discountRate2" required>
+                          <mat-hint align="end">%</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>EIRR</mat-label>
+                          <input matInput placeholder="EIRR" min="0" formControlName="eirr" required
+                            (keyup)="PercentValidator('eirr')">
+                          <mat-hint align="end">%</mat-hint>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Benefit Without Project</mat-label>
+                          <input matInput placeholder="Benefit Without Project" min="0"
+                            formControlName="benefitWithoutProject" (keyup)="MoneyValidator('benefitWithoutProject')"
+                            required>
+                          <mat-hint align="end">NRs/ha </mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Benefit With Project</mat-label>
+                          <input matInput placeholder="Benefit With Project" min="0"
+                            formControlName="benefitWithProject" (keyup)="MoneyValidator('benefitWithProject')"
+                            required>
+                          <mat-hint align="end">NRs/ha </mat-hint>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Project Life Unit</mat-label>
+                          <input matInput placeholder="Project Life" type="number" min="0" formControlName="projectLife"
+                            required>
+                          <mat-hint align="end">Years</mat-hint>
+                        </mat-form-field>
+                      </div>
+                    </div>
+
+                    <div class="form-group row" style="margin-left: 1em">
+                      <div class="col-md-6">
+                        <div *ngIf="EconomicInfoForm.get('id').value > 0; else showSaveBtn" class="col-md-4">
+                          <div *ngIf="ShowUpdateBtn">
+                            <button mat-flat-button type="submit" flex="15" color="primary"
+                              [disabled]="EconomicInfoForm.invalid || saving">
+                              Update
+                            </button>
+                          </div>
+                        </div>
+
+                        <ng-template #showSaveBtn>
+                          <div *ngIf="ShowSaveBtn">
+                            <button mat-flat-button type="submit" flex="15" color="primary"
+                              [disabled]="EconomicInfoForm.invalid || saving">
+                              {{ "Save" | localize }}
+                            </button>
+                          </div>
+                        </ng-template>
+                      </div>
+                      <div class="col-md-6" *ngIf="ShowUpdateBtn || ShowSaveBtn">
+                        <button mat-flat-button  (click)="getNewFormInstance()" type="button" class="btn btn-primary" flex="15">New</button>
+                      </div>
+                    </div>
+
+                  </div>
+                </form>
+
+                <hr>
+
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped" [busy]="isTableLoading">
+                    <thead>
+                      <tr>
+                        <th>S.N</th>
+                        <th>Costing Year</th>
+                        <th>Project Cost</th>
+
+                        <th>EIRR (%) </th>
+                        <th>B/C 1</th>
+                        <th>Discount Rate 1 (%)</th>
+                        <th>B/C 2</th>
+                        <th>Discount Rate 2 (%)</th>
+                        <!-- <th>Cost / ha</th> -->
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let lis of EconomicInfoList;let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ lis.costingYear }}</td>
+                        <td>{{ lis.totalProjectCost }}</td>
+
+                        <td>{{ lis.eirr }}</td>
+                        <td>{{ lis.bC1 }}</td>
+                        <td>{{ lis.discountRate1 }}</td>
+                        <td>{{ lis.bC2 }}</td>
+                        <td>{{ lis.discountRate2 }}</td>
+                        <!-- <td>------</td> -->
+                        <td>
+                          <button mat-menu-item type="button" class="info" (click)="editInfo(lis)">
+                            <!-- <mat-icon>edit</mat-icon> -->
+                            <span>View</span>
+                          </button>
+                          <!-- <button mat-menu-item (click)="editInfo(lis)">
+                        <mat-icon>trash</mat-icon>
+                        <span>Delete</span>
+                      </button> -->
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+
+              <button mat-stroked-button color="warn" (click)="exportAsXLSX()">Export Data</button>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+</div>

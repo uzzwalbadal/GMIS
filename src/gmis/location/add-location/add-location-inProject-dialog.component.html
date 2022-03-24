@@ -1,0 +1,177 @@
+<form autocomplete="off" #createRoleForm="ngForm" (ngSubmit)="AddWardsToList()">
+    <h1 mat-dialog-title style="align-items: center"> Address</h1>
+    <mat-dialog-content>
+
+        <div class="row">
+            <div class="col-md-3">
+                <label>Province</label>
+            </div>
+            <div class="col-md-3">
+                <label>District</label>
+            </div>
+            <div class="col-md-3">
+                <label>Local Body Type</label>
+            </div>
+            <div class="col-md-3">
+                <label>Local Body Name</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3" id="ProvienceDiv">
+                <select class="form-control show-tick" (change)="onChangeProvience($event.target.value)" required [(ngModel)]="provienceIds" name="provienceId" #provienceId="ngModel">
+          <option value="0">
+            Please Select Province
+          </option>
+          <option *ngFor="let provience of Proviences" [value]="provience.id">{{provience.provienceName}}</option>
+        </select>
+                <div *ngIf="provienceId.invalid && (provienceId.dirty || provienceId.touched)" class="alert alert-danger">
+                    <div *ngIf="provienceId.errors.required">
+                        Provience is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" id="onChangeDistrictDiv">
+                <select class="form-control show-tick" required (change)="onChangeDistrict($event.target.value)" [(ngModel)]="districtIds" name="districtId" #districtId="ngModel">
+          <option value="0">
+            Please Select District
+          </option>
+          <option *ngFor="let district of districts" [value]="district.id">{{district.districtName}}</option>
+        </select>
+                <div *ngIf="districtId.invalid && (districtId.dirty || districtId.touched)" class="alert alert-danger">
+
+                    <div *ngIf="districtId.errors.required">
+                        District is required.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" id="onChangeLocalBodyTypeDiv">
+                <select class="form-control show-tick" (change)="onChangeLocalBodyType($event.target.value)" [(ngModel)]="localBodyType" required name="localBodyTypeId">
+          <option value="0">
+            Please Select LocalBodyType
+          </option>
+          <option *ngFor="let type of localBodyTypes" [value]="type.id">{{type.localBodyTypeName}}</option>
+        </select>
+            </div>
+            <div class="col-md-3">
+                <select class="form-control show-tick" (change)="onChangeLocalBodyName($event.target.value)" [(ngModel)]="LocalBodyNamesId" required name="localBodyNameId">
+          <option value="0">
+            Please Select LocalBodyName
+          </option>
+          <option *ngFor="let name of localBodyNames" [value]="name.id">{{name.localBodyName}}</option>
+        </select>
+            </div>
+        </div>
+        <br>
+        <div class="row col-md-12">
+            <label>Wards</label>
+
+            <div class="row-fluid">
+                <div class="col-sm-1" *ngFor="let ward of wards">
+                    <div class="checkbox-wrapper">
+                        <mat-checkbox (change)="onChange(ward, $event)"> {{ ward }} </mat-checkbox>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- <button mat-button type="button" (click)="close()">{{ "Cancel" | localize }} </button> -->
+
+                <button class="btn btn-primary pull-right" type="submit" [disabled]="!createRoleForm.valid || provienceIds == 0 || wards_checked.length == 0 || localBodyType == 0 || LocalBodyNamesId == 0 || districtIds == 0 ">Add</button>
+            </div>
+        </div>
+
+        <br>
+        <hr>
+        <mat-card>
+            <div class="body table-responsive">
+                <div class="row col-md-12">
+                    <mat-tab-group dynamicHeight>
+                        <!-- <mat-tab-group class="demo-tab-group" style="height: calc(100% - 64px); min-height: calc(100% - 64px); min-width: 100%; width: 100%; margin: 0px; overflow-y: scroll"> -->
+                        <mat-tab label="Generalized View ">
+                            <div class="example-small-box mat-elevation-z4">
+                                <ng-template matTabContent>
+                                    <table class="table table-hover table-striped" [busy]="isTableLoading">
+                                        <thead>
+                                            <tr>
+                                                <th>S.N</th>
+                                                <th>Provience</th>
+                                                <th>District</th>
+                                                <th>Local Body Type</th>
+                                                <th>Local Body Name</th>
+                                                <th>Wards</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let items of TestLists; let i = index">
+                                                <td>{{ i+1 }}</td>
+                                                <td>{{ items.provienceName }}</td>
+                                                <td>{{ items.districtName }}</td>
+                                                <td>{{ items.localBodyTypeName }}</td>
+                                                <td>{{ items.localBodyName }}</td>
+                                                <td>{{ items.wardName }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </div>
+
+                        </mat-tab>
+                        <mat-tab label="Specified View ">
+                            <div class=" example-large-box mat-elevation-z4 ">
+                                <ng-template matTabContent>
+                                    <div class="body ">
+                                        <table class="table table-hover table-striped" [busy]="isTableLoading">
+                                            <thead>
+                                                <tr>
+                                                    <th>S.N</th>
+                                                    <th>Provience</th>
+                                                    <th>District</th>
+                                                    <th>Local Body Type</th>
+                                                    <th>Local Body Name</th>
+                                                    <th>Wards</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let items of ProjectWardRelations; let i = index">
+                                                    <td>{{ i+1 }}</td>
+                                                    <td>{{ items.provienceName }}</td>
+                                                    <td>{{ items.districtName }}</td>
+                                                    <td>{{ items.localBodyTypeName }}</td>
+                                                    <td>{{ items.localBodyName }}</td>
+                                                    <td>{{ items.wardName }}</td>
+                                                    <td>
+                                                        <div *ngIf="ShowUpdateBtn">
+                                                            <button mat-flat-button (click)="DeleteWardFromRelation(items.id)" type="button" class="btn btn-danger">
+                                   Remove
+                                </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </ng-template>
+
+                            </div>
+
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </mat-card>
+
+    </mat-dialog-content>
+    <br>
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" class="btn btn-primary" (click)="close()">
+        {{ "Cancel" | localize }}
+      </button>
+
+    </div>
+
+</form>

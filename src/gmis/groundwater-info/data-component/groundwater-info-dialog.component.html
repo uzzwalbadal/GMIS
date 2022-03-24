@@ -1,0 +1,780 @@
+<form autocomplete="off" #createRoleForm="ngForm" (ngSubmit)="save()">
+    <h1 mat-dialog-title>Ground Water Information Form</h1>
+
+    <div mat-dialog-content>
+        <div class="">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tubewell No</mat-label>
+                        <input matInput type="number" placeholder="Tubewell No" name="tubewellNo"
+                            [(ngModel)]="dto_GroundWaterInformation.tubewellNo" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Tubewell Name</mat-label>
+                        <input matInput type="text" placeholder="Tubewell Name" name="tubeWellName"
+                            [(ngModel)]="dto_GroundWaterInformation.tubeWellName" required>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Command Area</mat-label>
+                        <input matInput type="number" placeholder="Command Area" name="CommandArea"
+                            [(ngModel)]="dto_GroundWaterInformation.commandArea" required min="0">
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <mat-tab-group dynamicHeight='true'>
+                <mat-tab label="Tubewell Information">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Tubewell Information</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Location</mat-label>
+                                <input matInput type="text" placeholder="Location" name="location"
+                                    [(ngModel)]="dto_GroundWaterInformation.location" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <mat-card style="margin-bottom: 5px; padding-top: 0px; padding-bottom: 0px">
+                        <div class="row " style="padding-top: 0px; padding-bottom: 0px">
+                            <div class="">
+                                <h4>Longitude</h4>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 0px; padding-bottom: 0px">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Degree</mat-label>
+                                    <input matInput [(ngModel)]="dto_GroundWaterInformation.longitudeDegree"
+                                        name="longitudeDegree" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Minute</mat-label>
+                                    <input matInput [(ngModel)]="dto_GroundWaterInformation.longitudeMin"
+                                        name="longitudeMin" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Second</mat-label>
+                                    <input matInput [(ngModel)]="dto_GroundWaterInformation.longitudeSecond"
+                                        name="longitudeSecond" required>
+                                    <!-- <mat-hint align="end">Longtitude</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card>
+                    <br>
+
+                    <mat-card style="margin-bottom: 5px; padding-top: 0px; padding-bottom: 0px">
+                        <div class="row " style="padding-top: 0px; padding-bottom: 0px">
+                            <div class="">
+                                <h4>Latitude</h4>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 0px; padding-bottom: 0px">
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Degree</mat-label>
+                                    <input matInput [(ngModel)]="dto_GroundWaterInformation.latitudeDegree"
+                                        name="latitudeDegree" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Minute</mat-label>
+                                    <input matInput [(ngModel)]="dto_GroundWaterInformation.latitudeMin"
+                                        name="latitudeMin" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Second</mat-label>
+                                    <input matInput [(ngModel)]="dto_GroundWaterInformation.latitudeSecond"
+                                        name="latitudeSecond" required>
+                                    <!-- <mat-hint align="end">Longtitude</mat-hint> -->
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-card>
+                    <br>
+                    
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                <label>Elevation:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Elevation</mat-label>
+                                <input matInput type="number" required
+                                    [(ngModel)]="dto_GroundWaterInformation.elevation" name="elevation" min="0">
+                                <mat-hint align="end">masl</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>Masl</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Type of Tubewell:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Type of Tubewell</mat-label>
+                                <mat-select [(ngModel)]="dto_GroundWaterInformation.tubewellType" name="tubewellType">
+                                    <mat-option value="Deep Tubewell">Deep Tubewell</mat-option>
+                                    <mat-option value="Power Drill Shallow Tubewell">Power Drill Shallow Tubewell
+                                    </mat-option>
+                                    <mat-option value="Shallow Tubewell">Shallow Tubewell</mat-option>
+                                    <mat-option value="Dug well">Dug well</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-1">
+                            <span></span>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <label>Tubewell Housing Pipe Size:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tubewell Housing Pipe Size</mat-label>
+                                <input matInput [(ngModel)]="dto_GroundWaterInformation.tubewellHousingPipeSize"
+                                    type="number" required name="tubewellHousingPipeSize" min="0">
+                                <mat-hint align="end">mm</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>mm</span>
+                            </div> -->
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                <label>Tubewell Screen & Casing Pipe Size:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Tubewell Screen & Casing Pipe Size</mat-label>
+                                <input matInput type="number" required
+                                    [(ngModel)]="dto_GroundWaterInformation.tubewellScreenAndCastingPipeSize"
+                                    name="tubewellScreenAndCastingPipeSize" min="0">
+                                <mat-hint align="end">mm</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>mm</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Static water level:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Static Water Level</mat-label>
+                                <input matInput type="number" required name="staticWaterLevel"
+                                    [(ngModel)]="dto_GroundWaterInformation.staticWaterLevel" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>m</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Aquifer Material:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Aquifer Material</mat-label>
+                                <input matInput type="text" required name="aquiferMaterail"
+                                    [(ngModel)]="dto_GroundWaterInformation.aquiferMaterail">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-1">
+                            <span></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                <label>Total drill depth:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Total Drill Depth</mat-label>
+                                <input matInput type="number" required name="totalDrillDepth"
+                                    [(ngModel)]="dto_GroundWaterInformation.totalDrillDepth" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>m</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Housing length:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Housing length</mat-label>
+                                <input matInput type="number" required name="housingLength"
+                                    [(ngModel)]="dto_GroundWaterInformation.housingLength" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>m</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Screen Length:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Screen Length</mat-label>
+                                <input matInput type="number" required name="screenLength"
+                                    [(ngModel)]="dto_GroundWaterInformation.screenLength" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>m</span>
+                            </div> -->
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                <label>Type of Screen:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Type of Screen</mat-label>
+                                <mat-select [(ngModel)]="dto_GroundWaterInformation.typeOfScreen" name="typeOfScreen"
+                                    required>
+                                    <mat-option value="Jonnon and Jonson">Jonnon and Jonson</mat-option>
+                                    <mat-option value="L.C.G Jonson">L.C.G Jonson</mat-option>
+                                    <mat-option value="Slotted">Slotted</mat-option>
+                                    <mat-option value="Perforated">Perforated</mat-option>
+                                    <mat-option value="Others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span></span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Pumping Discharge:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Pumping Discharge</mat-label>
+                                <input matInput type="number" required name="pumpingDischarge"
+                                    [(ngModel)]="dto_GroundWaterInformation.pumpingDischarge" min="0">
+                                <mat-hint align="end">lps</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>lps</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Drawdown:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Drawdown</mat-label>
+                                <input matInput type="number" required name="drawdown"
+                                    [(ngModel)]="dto_GroundWaterInformation.drawdown" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>m</span>
+                            </div> -->
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                <label>Aquifer Storage coefficient:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Aquifer Storage coefficient</mat-label>
+                                <input matInput type="text" required name="aquiferStorageCoefficient"
+                                    [(ngModel)]="dto_GroundWaterInformation.aquiferStorageCoefficient">
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span></span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Aquifer Transmissivity:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Aquifer Transmissivity</mat-label>
+                                <input matInput type="number" required name="aquifertransmissivity"
+                                    [(ngModel)]="dto_GroundWaterInformation.aquifertransmissivity" min="0">
+                                <mat-hint align="end">m/day</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>m/day</span>
+                            </div> -->
+
+
+                    </div>
+
+                </mat-tab>
+
+                <mat-tab label="Distribution System">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Distribution System</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                                <label>Type of Distribution System:</label>
+                                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Type of Distribution System</mat-label>
+                                <mat-select name="typeOfDistributionSystem" required
+                                    [(ngModel)]="dto_GroundWaterInformation.typeOfDistributionSystem">
+                                    <mat-option value="Open Channel">Open Channel</mat-option>
+                                    <mat-option value="Buried Pipe">Buried Pipe</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span></span>
+                                            </div> -->
+                        <!-- <div class="col-md-1">
+                                                <label>No of Outlets:</label>
+                                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>No of Outlets</mat-label>
+                                <input matInput type="number" required name="noOfOutlets"
+                                    [(ngModel)]="dto_GroundWaterInformation.noOfOutlets" min="0">
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span></span>
+                                            </div> -->
+
+                    </div>
+
+                    <div *ngIf="dto_GroundWaterInformation.typeOfDistributionSystem == 'Open Channel'">
+                        <div class="row">
+                            <!-- <div class="col-md-1">
+                                                        <label>Length of Open Channel</label>
+                                                    </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Length of Open Channel</mat-label>
+                                    <input matInput type="number" placeholder="Length of Open Channel" required
+                                        name="lengthOfOpenChannel"
+                                        [(ngModel)]="dto_GroundWaterInformation.lengthOfOpenChannel" min="0">
+                                    <mat-hint align="end">m</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                                                        <span>m</span>
+                                                    </div> -->
+                            <!-- <div class="col-md-1">
+                                                        <label>Size of alpha valve:</label>
+                                                    </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Size of Alpha Valve</mat-label>
+                                    <input matInput type="number" name="sizeOfAlphaValve"
+                                        [(ngModel)]="dto_GroundWaterInformation.sizeOfAlphaValve" required min="0">
+                                    <mat-hint align="end">mm</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-1">
+                                <span></span>
+                            </div>
+                            <!-- <div class="col-md-1">
+                                                        <label>Pipe Materail:</label>
+                                                    </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Pipe Material</mat-label>
+                                    <mat-select name="pipeMaterial"
+                                        [(ngModel)]="dto_GroundWaterInformation.pipeMaterial" required>
+                                        <mat-option value="UPVC">UPVC</mat-option>
+                                        <mat-option value="HDPC">HDPE</mat-option>
+                                        <mat-option value="PVC">PVC</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-1">
+                                <span></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!-- <div class="col-md-1">
+                                                        <label>Length of Pipe</label>
+                                                    </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Length of Pipe</mat-label>
+                                    <input matInput type="number" required name="lengthOfPipe"
+                                        [(ngModel)]="dto_GroundWaterInformation.lengthOfPipe" min="0">
+                                    <mat-hint align="end">m</mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                                                        <span>m</span>
+                                                    </div> -->
+
+                            <!-- <div class="col-md-1">
+                                                        <label>No of surge Raiser</label>
+                                                    </div> -->
+                            <div class="col-md-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>No. of Surge Raiser</mat-label>
+                                    <input matInput type="number" required name="noOfSurgeRaiser"
+                                        [(ngModel)]="dto_GroundWaterInformation.noOfSurgeRaiser" min="0">
+
+                                </mat-form-field>
+                            </div>
+                            <!-- <div class="col-md-1">
+                                                        <span>m</span>
+                                                    </div> -->
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Pump Information">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Pump Information</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Brand of Pump</mat-label>
+                                <input matInput type="text" required name="brandOfPump"
+                                    [(ngModel)]="dto_GroundWaterInformation.brandOfPump">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Power</mat-label>
+                                <input matInput type="number" required [(ngModel)]="dto_GroundWaterInformation.power"
+                                    name="power" min="0">
+                                <mat-hint align="end">HP</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Head</mat-label>
+                                <input matInput type="number" required name="head"
+                                    [(ngModel)]="dto_GroundWaterInformation.head" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                <label>Pump Discharge:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Pump Discharge</mat-label>
+                                <input matInput type="number" required name="pumpDischarge"
+                                    [(ngModel)]="dto_GroundWaterInformation.pumpDischarge" min="0">
+                                <mat-hint align="end">lps</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>lps</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Efficiency of Motor:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Efficiency of Motor</mat-label>
+                                <input matInput type="number" required
+                                    name="dto_GroundWaterInformation.efficienyOfMoter" min="0" max="100"
+                                    [(ngModel)]="dto_GroundWaterInformation.efficienyOfMoter">
+                                <mat-hint align="end">%</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>%</span>
+                            </div> -->
+                        <!-- <div class="col-md-1">
+                                <label>Efficiency of Pump:</label>
+                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Efficiency of Pump</mat-label>
+                                <input matInput type="number" required name="efficienyOfPump"
+                                    [(ngModel)]="dto_GroundWaterInformation.efficienyOfPump" min="0" max="100">
+                                <mat-hint align="end">%</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                <span>%</span>
+                            </div> -->
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Pump lowering depth</mat-label>
+                                <input matInput type="number" required name="pumpLoweringDepth"
+                                    [(ngModel)]="dto_GroundWaterInformation.pumpLoweringDepth"
+                                    placeholder="Pump lowering depth" min="0">
+                                <mat-hint align="end">m</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Column Pipe Size</mat-label>
+                                <input matInput type="number" required name="columnPipeSize" min="0" max="100"
+                                    [(ngModel)]="dto_GroundWaterInformation.columnPipeSize"
+                                    placeholder="Column Pipe Size">
+                                <mat-hint align="end">mm</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Column Type</mat-label>
+                                <mat-select [(ngModel)]="dto_GroundWaterInformation.columnType" name="columnType"
+                                    required>
+                                    <mat-option value="MS">MS</mat-option>
+                                    <mat-option value="GI">GI</mat-option>
+                                    <mat-option value="Others">Others</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="dto_GroundWaterInformation.columnType =='Others'">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Column Type Other</mat-label>
+                                <input matInput type="text" placeholder="PumpInfo ColumnType Other" required
+                                    name="pumpInfoColumnTypeOther"
+                                    [required]="dto_GroundWaterInformation.columnType == 'Others'"
+                                    [(ngModel)]="dto_GroundWaterInformation.pumpInfoColumnTypeOther">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                </mat-tab>
+
+                <mat-tab label="Pump House Information">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Pump House Information</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Size of Pump House (L*B*H)</mat-label>
+                                <input matInput type="text" required name="sizeOfPumpHouse"
+                                    [(ngModel)]="dto_GroundWaterInformation.sizeOfPumpHouse">
+                                <mat-hint align="end">m*m*m</mat-hint>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Height of Overhead Tank</mat-label>
+                                <input matInput type="number" required
+                                    [(ngModel)]="dto_GroundWaterInformation.heightOfOverheadTank"
+                                    name="heightOfOverheadTank" min="0">
+                                <mat-hint align="end">m</mat-hint>
+
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span>m</span>
+                                            </div> -->
+                        <!-- <div class="col-md-1">
+                                                <label>Volumne of overhead tank:</label>
+                                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Volume of Overhead Tank</mat-label>
+                                <input matInput type="number" required name="volumeOverheadTank"
+                                    [(ngModel)]="dto_GroundWaterInformation.volumeOverheadTank" min="0">
+                                <mat-hint align="end">cu.m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span>cu.m</span>
+                                            </div> -->
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Electrification">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Electrification</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                                <label>Length of 11kv HT Tranmission line</label>
+                                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Length of 11kv HT Tranmission Line</mat-label>
+                                <input matInput type="number" required name="lengthOf11KvHtTransLine"
+                                    [(ngModel)]="dto_GroundWaterInformation.lengthOf11KvHtTransLine" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span>m</span>
+                                            </div> -->
+                        <!-- <div class="col-md-1">
+                                                <label>440V Lt tranmission line:</label>
+                                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Length of 440V Lt Tranmission Line</mat-label>
+                                <input matInput type="number" required name="lengthof440VLtTransLine"
+                                    [(ngModel)]="dto_GroundWaterInformation.lengthof440VLtTransLine" min="0">
+                                <mat-hint align="end">m</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span>m</span>
+                                            </div> -->
+                        <!-- <div class="col-md-1">
+                                                <label>Number of poles:</label>
+                                            </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Number of Poles(HT+LT) </mat-label>
+                                <input matInput type="number" required name="numberOfPoles"
+                                    [(ngModel)]="dto_GroundWaterInformation.numberOfPoles" min="0">
+
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                <span></span>
+                                            </div> -->
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="col-md-1">
+                                                    <label>Transformer capacity</label>
+                                                </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Transformer Capacity</mat-label>
+                                <input matInput type="number" required name="transformerCapacity"
+                                    [(ngModel)]="dto_GroundWaterInformation.transformerCapacity" min="0">
+                                <mat-hint align="end">KVA</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                    <span>KVA</span>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <label>Control Panel</label>
+                                                </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Control Panel</mat-label>
+                                <input matInput type="number" required name="controlPanel"
+                                    [(ngModel)]="dto_GroundWaterInformation.controlPanel" min="0">
+                                <mat-hint align="end">HP</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                    <span>HP</span>
+                                                </div> -->
+                        <!-- <div class="col-md-1">
+                                                    <label>Voltage stabilizer:</label>
+                                                </div> -->
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Voltage Stabilizer</mat-label>
+                                <input matInput type="number" required name="voltageStabilizer"
+                                    [(ngModel)]="dto_GroundWaterInformation.voltageStabilizer" min="0">
+                                <mat-hint align="end">KVA</mat-hint>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Transformer Brand</mat-label>
+                                <input matInput placeholder="Transformer Name" type="text" required
+                                    name="transformerBrand" [(ngModel)]="dto_GroundWaterInformation.transformerBrand">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Number of poles heading (HT+LT)</mat-label>
+                                <input matInput placeholder="Number of poles heading (HT+LT)" type="number" min="0"
+                                    required name="numberofpolesheading_HT_LT"
+                                    [(ngModel)]="dto_GroundWaterInformation.numberofpolesheading_HT_LT">
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-1">
+                                                    <span>KVA</span>
+                                                </div> -->
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+
+        </div>
+    </div>
+
+    <div mat-dialog-actions align="end">
+        <button mat-button type="button" [disabled]="saving" (click)="close(false)">
+            {{ "Cancel" | localize }}
+        </button>
+        <div *ngIf="dto_GroundWaterInformation.id > 0 ; else SaveNewData">
+            <div *ngIf="ShowUpdateBtn">
+                <button mat-flat-button type="submit" flex="15" color="primary"
+                    [disabled]="!createRoleForm.form.valid || saving">
+                    Update
+                </button>
+            </div>
+        </div>
+        <ng-template #SaveNewData>
+            <div *ngIf="ShowSaveBtn">
+                <button mat-flat-button type="submit" flex="15" color="primary"
+                    [disabled]="!createRoleForm.form.valid || saving">
+                    {{ "Save" | localize }}
+                </button>
+            </div>
+        </ng-template>
+
+    </div>
+</form>
